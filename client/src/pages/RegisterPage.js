@@ -1,7 +1,8 @@
 
 import {useState} from "react";
-
+import {useParams, useNavigate} from "react-router-dom";
 export default function RegisterPage() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function register(ev) {
@@ -13,6 +14,7 @@ export default function RegisterPage() {
     });
     if (response.status === 200) {
       alert('registration successful');
+      navigate("/");
     } else {
       alert('registration failed');
     }
