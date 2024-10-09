@@ -1,9 +1,10 @@
 
-import {Navigate, Link} from "react-router-dom";
+import {Navigate, useNavigate, Link} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "./UserContext";
 
 export default function Header() {
+  const nav = useNavigate();
   const {setUserInfo,userInfo} = useContext(UserContext);
   useEffect(() => {
     try {
@@ -24,9 +25,11 @@ export default function Header() {
     fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST',
+    }).then(() => {
+      setUserInfo(null); // Clear user info on successful logout
+      nav('/');
+      window.location.reload();
     });
-    setUserInfo(null);
-    
   }
 
   const username = userInfo?.username;

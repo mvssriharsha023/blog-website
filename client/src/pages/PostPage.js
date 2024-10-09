@@ -10,15 +10,20 @@ export default function PostPage() {
   const {userInfo} = useContext(UserContext);
   const {id} = useParams();
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:4000/post/${id}`)
-      .then(response => {
-        response.json().then(postInfo => {
-          setPostInfo(postInfo);
+    try {
+      if (id !== null) {
+        fetch(`http://localhost:4000/post/${id && id}`)
+        .then(response => {
+          response.json().then(postInfo => {
+            setPostInfo(postInfo);
+          });
         });
-      });
+      } 
+    } catch (error) {
+      console.log(error);
     }
-  }, []);
+    
+  }, [id]);
 
   if (!postInfo) return '';
 
