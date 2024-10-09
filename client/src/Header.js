@@ -26,7 +26,6 @@ export default function Header() {
       method: 'POST',
     });
     setUserInfo(null);
-    return <Navigate to={'/'} />
     
   }
 
