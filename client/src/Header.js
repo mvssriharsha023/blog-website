@@ -1,5 +1,5 @@
 
-import {Link} from "react-router-dom";
+import {Navigate, Link} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "./UserContext";
 
@@ -11,7 +11,7 @@ export default function Header() {
         credentials: 'include',
       }).then(response => {
         response.json().then(userInfo => {
-          setUserInfo(userInfo);
+          setUserInfo({});
         });
       });
     } catch (error) {
@@ -26,6 +26,8 @@ export default function Header() {
       method: 'POST',
     });
     setUserInfo(null);
+    return <Navigate to={'/'} />
+    
   }
 
   const username = userInfo?.username;
